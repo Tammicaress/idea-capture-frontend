@@ -284,4 +284,58 @@ export default function App() {
         </div>
 
         <div className="filters">
-          {['all', ...Object.keys(categoryMap)].map
+          {['all', ...Object.keys(categoryMap)].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`filter-btn ${filter === cat ? 'active' : ''}`}
+            >
+              {cat === 'all' ? '📌 All Ideas' : categoryMap[cat]}
+            </button>
+          ))}
+        </div>
+
+        {loading ? (
+          <div className="loading">Loading ideas...</div>
+        ) : (
+          <div className="ideas-grid">
+            {filteredIdeas.length === 0 ? (
+              <p className="no-ideas">No ideas yet. Create your first one!</p>
+            ) : (
+              filteredIdeas.map((idea) => (
+                <div
+                  key={idea.id}
+                  className={`idea-card idea-${idea.category}`}
+                >
+                  <div className="idea-header">
+                    <h3>{idea.title}</h3>
+                    <button
+                      onClick={() => handleDeleteIdea(idea.id)}
+                      className="delete-btn"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div className="idea-category">
+                    {categoryMap[idea.category]}
+                  </div>
+                  {idea.description && (
+                    <p className="idea-description">{idea.description}</p>
+                  )}
+                  {idea.next_action && (
+                    <div className="next-action">
+                      <strong>Next:</strong> {idea.next_action}
+                    </div>
+                  )}
+                  <div className="idea-date">
+                    {new Date(idea.created_at).toLocaleDateString()}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
