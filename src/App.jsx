@@ -1,11 +1,11 @@
-/* eslint-disable no-restricted-globals */
+/* eslint-disable no-restricted-globals, react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
 
 export default function App() {
-  const [user, setUser] = useState(null);
+
   const [token, setToken] = useState(null);
   const [ideas, setIdeas] = useState([]);
   const [filter, setFilter] = useState('all');
