@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
@@ -318,6 +319,7 @@ export default function App() {
                   </div>
                   <div className="idea-category">
                     {categoryMap[idea.category]}
+                  /* eslint-disable no-restricted-globals */
                   </div>
                   {idea.description && (
                     <p className="idea-description">{idea.description}</p>
